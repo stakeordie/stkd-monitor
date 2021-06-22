@@ -18,10 +18,21 @@ const stats = {
         const newStat = {
             _id:statsDocRef.id,
             _date:FieldValue.serverTimestamp(),
-            info:{...staking_info}
+            data:{...staking_info}
         }
         statsDocRef.set(newStat);
         return newStat;
+    },
+    getAll: async ()=>{
+        const data = await statsCollection.get();
+        return data.docs.map((d)=> d.data());
+    },
+    getOrderByDate: async (limit=50)=>{
+        const data = await statsCollection.orderBy('_date','desc').limit(limit).get();
+        return data.docs.map((d)=> d.data());
+    },
+    get: async (itemId) => {
+        return (await statsCollection.doc(itemId).get()).data();
     }
 }
 
