@@ -1,6 +1,6 @@
 const { CosmWasmClient } = require('secretjs');
 
-export const getSTKDInfo = async () => {
+const getSTKDInfo = async () => {
   try {
     const client = new CosmWasmClient('http://api.holodeck.stakeordie.com'); 
     const contractAddress = 'secret1d54dvtpmptzk4snwc405r263ahq0nqr5ajndt5'; 
@@ -11,3 +11,4 @@ export const getSTKDInfo = async () => {
     return undefined
   }
 }
+module.exports = getSTKDInfo;
